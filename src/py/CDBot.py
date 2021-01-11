@@ -16,9 +16,7 @@ POLYTOPE_WIKI = "https://polytope.miraheze.org/wiki/"
 TOKEN = open("../txt/TOKEN.txt", "r").read()
 PREFIX = open("../txt/PREFIX.txt", "r").read()
 
-# Users to ping on unexpected error:
-USER_ID = "370964201478553600"
-USER_ID2= "581141017823019038"
+USER_ID = ["370964201478553600","581141017823019038","442713612822380554","253227815338508289"] # Users to ping on unexpected error
 
 client = commands.Bot(command_prefix = PREFIX)
 fileCount = 0
@@ -214,7 +212,9 @@ async def error(ctx, e, expected):
         msg = f"```ERROR: {str(e)}```"
     else:
         logMsg = f"UNEXPECTED ERROR: {str(e)}"
-        msg = f"```UNEXPECTED ERROR: {str(e)}```\n\n<@{USER_ID}> <@{USER_ID2}>"
+        msg = f"```UNEXPECTED ERROR: {str(e)}```\n"
+        for i in USER_ID:
+            msg += "<@"+i+"> "
 
     a_logger.info(logMsg)
     await ctx.send(msg)
